@@ -1,5 +1,5 @@
 # debug
-
+  Warn:Beta! Not for production!
   tiny node.js debugging utility modelled after node core's debugging technique.
 
 ## Installation
