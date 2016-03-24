@@ -70,6 +70,18 @@ function debug(namespace) {
   function enabled() {
 
     var self = enabled;
+    // set time
+    const time = function () {
+      var date, day, month, hours, minutes, seconds, time;
+      date = new Date();
+      day = date.getDay();
+      month = ((date.getMonth() + 1).toString().length === 1 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1);
+      hours = (date.getHours().toString().length === 1 ? '0' + date.getHours() : date.getHours());
+      minutes = (date.getMinutes().toString().length === 1 ? '0' + date.getMinutes() : date.getMinutes());
+      seconds = (date.getSeconds().toString().length === 1 ? '0' + date.getSeconds() : date.getSeconds());
+      time = day + '.' + month + ' ' + hours + ':' + minutes + ':' + seconds;
+      return time
+    }
 
     // set `diff` timestamp
     var curr = +new Date();
@@ -113,6 +125,9 @@ function debug(namespace) {
     if ('function' === typeof exports.formatArgs) {
       args = exports.formatArgs.apply(self, args);
     }
+    // add time
+    args['0'] = time() + args['0']
+    
     var logFn = enabled.log || exports.log || console.log.bind(console);
     logFn.apply(self, args);
   }
